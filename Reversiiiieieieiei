@@ -1,0 +1,90 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace reversi
+{
+    public partial class Reversi : Form
+    {
+        private bool hulp; //hulp aan of uit
+        private int beurt; //welke beurt is het?
+        private int VakjesX; 
+        private int VakjesY;
+        const int Leeg = 0; 
+        const int Blauw = 1;
+        const int Rood = 2;
+        private int[,]
+        private int Speleraanzet;
+        private string StringSpelerAanZet => Speleraanzet == Rood ? "Rood" : "Blauw";
+        const int Groottevakje = 32;
+        const int diameterCirkels = Groottevakje - 4; 
+
+
+
+
+        public Reversi()
+        {
+            InitializeComponent();
+        }
+
+        private void Startnieuwspel_Click(object sender, EventArgs e) //start nieuw spel
+        {
+            beurt = 1;
+            hulp = false;
+            VakjesX = (int)aantalX.Value;
+            VakjesY = (int)aantalY.Value;
+            veld = new int[VakjesX, VakjesY];
+
+            
+
+
+
+
+        }
+        private void panel1_Paint(object sender, PaintEventArgs pea)
+        {
+
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e) //help aan en uit zettetn
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e) //welke button is dit??
+        {
+
+        }
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
