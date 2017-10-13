@@ -1,0 +1,207 @@
+using System.Drawing;
+
+namespace reversiSpel
+{
+    partial class Reversi
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+			this.nieuwSpelButton = new System.Windows.Forms.Button();
+			this.helpButton = new System.Windows.Forms.Button();
+			this.speelVeldPanel = new System.Windows.Forms.Panel();
+			this.infoPanel = new System.Windows.Forms.Panel();
+			this.vakjesX = new System.Windows.Forms.NumericUpDown();
+			this.vakjesY = new System.Windows.Forms.NumericUpDown();
+			this.vakjesXLabel = new System.Windows.Forms.Label();
+			this.vakjesYLabel = new System.Windows.Forms.Label();
+			this.nieuwSpelPanel = new System.Windows.Forms.Panel();
+			this.statsPanel = new System.Windows.Forms.Panel();
+			((System.ComponentModel.ISupportInitialize)(this.vakjesX)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.vakjesY)).BeginInit();
+			this.nieuwSpelPanel.SuspendLayout();
+			this.SuspendLayout();
+			// 
+			// nieuwSpelButton
+			// 
+			this.nieuwSpelButton.Location = new System.Drawing.Point(0, 0);
+			this.nieuwSpelButton.Margin = new System.Windows.Forms.Padding(4);
+			this.nieuwSpelButton.Name = "nieuwSpelButton";
+			this.nieuwSpelButton.Size = new System.Drawing.Size(101, 67);
+			this.nieuwSpelButton.TabIndex = 0;
+			this.nieuwSpelButton.Text = "Nieuw Spel";
+			this.nieuwSpelButton.UseVisualStyleBackColor = true;
+			this.nieuwSpelButton.Click += new System.EventHandler(this.nieuwSpelButton_Click);
+			// 
+			// helpButton
+			// 
+			this.helpButton.Location = new System.Drawing.Point(52, 144);
+			this.helpButton.Margin = new System.Windows.Forms.Padding(4);
+			this.helpButton.Name = "helpButton";
+			this.helpButton.Size = new System.Drawing.Size(72, 28);
+			this.helpButton.TabIndex = 1;
+			this.helpButton.Text = "Help";
+			this.helpButton.UseVisualStyleBackColor = true;
+			this.helpButton.Click += new System.EventHandler(this.helpButton_Click);
+			// 
+			// speelVeldPanel
+			// 
+			this.speelVeldPanel.BackColor = System.Drawing.Color.White;
+			this.speelVeldPanel.Location = new System.Drawing.Point(52, 180);
+			this.speelVeldPanel.Margin = new System.Windows.Forms.Padding(4);
+			this.speelVeldPanel.Name = "speelVeldPanel";
+			this.speelVeldPanel.Size = new System.Drawing.Size(192, 192);
+			this.speelVeldPanel.TabIndex = 5;
+			this.speelVeldPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.speelVeldPanel_Paint);
+			this.speelVeldPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.speelVeldPanel_Click);
+			// 
+			// infoPanel
+			// 
+			this.infoPanel.Location = new System.Drawing.Point(52, 21);
+			this.infoPanel.Margin = new System.Windows.Forms.Padding(4);
+			this.infoPanel.Name = "infoPanel";
+			this.infoPanel.Size = new System.Drawing.Size(148, 63);
+			this.infoPanel.TabIndex = 6;
+			this.infoPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.infoPanel_Paint);
+			// 
+			// vakjesX
+			// 
+			this.vakjesX.Location = new System.Drawing.Point(108, 8);
+			this.vakjesX.Maximum = new decimal(new int[] {
+            45,
+            0,
+            0,
+            0});
+			this.vakjesX.Minimum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+			this.vakjesX.Name = "vakjesX";
+			this.vakjesX.Size = new System.Drawing.Size(56, 22);
+			this.vakjesX.TabIndex = 7;
+			this.vakjesX.Value = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
+			// 
+			// vakjesY
+			// 
+			this.vakjesY.Location = new System.Drawing.Point(108, 36);
+			this.vakjesY.Maximum = new decimal(new int[] {
+            19,
+            0,
+            0,
+            0});
+			this.vakjesY.Minimum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+			this.vakjesY.Name = "vakjesY";
+			this.vakjesY.Size = new System.Drawing.Size(56, 22);
+			this.vakjesY.TabIndex = 8;
+			this.vakjesY.Value = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
+			// 
+			// vakjesXLabel
+			// 
+			this.vakjesXLabel.AutoSize = true;
+			this.vakjesXLabel.Location = new System.Drawing.Point(170, 10);
+			this.vakjesXLabel.Name = "vakjesXLabel";
+			this.vakjesXLabel.Size = new System.Drawing.Size(80, 17);
+			this.vakjesXLabel.TabIndex = 9;
+			this.vakjesXLabel.Text = "Horizontaal";
+			// 
+			// vakjesYLabel
+			// 
+			this.vakjesYLabel.AutoSize = true;
+			this.vakjesYLabel.Location = new System.Drawing.Point(170, 38);
+			this.vakjesYLabel.Name = "vakjesYLabel";
+			this.vakjesYLabel.Size = new System.Drawing.Size(63, 17);
+			this.vakjesYLabel.TabIndex = 10;
+			this.vakjesYLabel.Text = "Verticaal";
+			// 
+			// nieuwSpelPanel
+			// 
+			this.nieuwSpelPanel.Controls.Add(this.nieuwSpelButton);
+			this.nieuwSpelPanel.Controls.Add(this.vakjesX);
+			this.nieuwSpelPanel.Controls.Add(this.vakjesYLabel);
+			this.nieuwSpelPanel.Controls.Add(this.vakjesY);
+			this.nieuwSpelPanel.Controls.Add(this.vakjesXLabel);
+			this.nieuwSpelPanel.Location = new System.Drawing.Point(234, 13);
+			this.nieuwSpelPanel.Name = "nieuwSpelPanel";
+			this.nieuwSpelPanel.Size = new System.Drawing.Size(257, 71);
+			this.nieuwSpelPanel.TabIndex = 11;
+			// 
+			// statsPanel
+			// 
+			this.statsPanel.Location = new System.Drawing.Point(52, 114);
+			this.statsPanel.Name = "statsPanel";
+			this.statsPanel.Size = new System.Drawing.Size(284, 23);
+			this.statsPanel.TabIndex = 12;
+			this.statsPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.statsPanel_Paint);
+			// 
+			// Reversi
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.ClientSize = new System.Drawing.Size(503, 565);
+			this.Controls.Add(this.statsPanel);
+			this.Controls.Add(this.nieuwSpelPanel);
+			this.Controls.Add(this.helpButton);
+			this.Controls.Add(this.infoPanel);
+			this.Controls.Add(this.speelVeldPanel);
+			this.Margin = new System.Windows.Forms.Padding(4);
+			this.Name = "Reversi";
+			this.Text = "Reversi";
+			((System.ComponentModel.ISupportInitialize)(this.vakjesX)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.vakjesY)).EndInit();
+			this.nieuwSpelPanel.ResumeLayout(false);
+			this.nieuwSpelPanel.PerformLayout();
+			this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Button nieuwSpelButton;
+        private System.Windows.Forms.Button helpButton;
+        private System.Windows.Forms.Panel speelVeldPanel;
+        private System.Windows.Forms.Panel infoPanel;
+		private System.Windows.Forms.NumericUpDown vakjesX;
+		private System.Windows.Forms.NumericUpDown vakjesY;
+		private System.Windows.Forms.Label vakjesXLabel;
+		private System.Windows.Forms.Label vakjesYLabel;
+		private System.Windows.Forms.Panel nieuwSpelPanel;
+		private System.Windows.Forms.Panel statsPanel;
+	}
+}
+
