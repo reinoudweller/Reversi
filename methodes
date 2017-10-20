@@ -4,38 +4,38 @@ public Reversi()
 //public Reversi()
 
 private void StartNieuwSpel()
-//private void Startnieuwspel()
+//private void Startnieuwspel()R
 
 private void speelVeldPanel_Click(object obj, MouseEventArgs mea)
-//private void panel1_Click(object sender, MouseEventArgs mea)
+//private void panel1_Click(object sender, MouseEventArgs mea)L
 
 private void infoPanel_Paint(object sender, PaintEventArgs e)
-//private void ScoreBlauw_Paint(object sender, PaintEventArgs e)
-//private void ScoreRood_Paint(object sender, PaintEventArgs e)
+//private void ScoreBlauw_Paint(object sender, PaintEventArgs e)L
+//private void ScoreRood_Paint(object sender, PaintEventArgs e)L
 
 private void statsPanel_Paint(object sender, PaintEventArgs e)
-//private void Aanzet_Paint(object sender, PaintEventArgs e)
+//private void Aanzet_Paint(object sender, PaintEventArgs e)R
 
 private void speelVeldPanel_Paint(object sender, PaintEventArgs e)
-//private void panel1_Paint(object sender, PaintEventArgs pea)
+//private void panel1_Paint(object sender, PaintEventArgs pea)L
 
 private void nieuwSpelButton_Click(object sender, EventArgs e)
-//private void StartnieuwspelButton(object sender, EventArgs e)
+//private void StartnieuwspelButton(object sender, EventArgs e)-
 
 private void helpButton_Click(object sender, EventArgs e)
-//private void HelpButton_Click(object sender, EventArgs e)
+//private void HelpButton_Click(object sender, EventArgs e)R
 
 private void NieuweLegaleZetten()
-//private void NieuwZet()
+//private void NieuwZet()-
 
 private void ReversiAlgoritme(int x, int y, int modus)
-//private void Algoritme(int x, int y, int modus)
+//private void Algoritme(int x, int y, int modus)R
 
 private void CheckDirectie(int x, int y, int dx, int dy, int afstandTotRandX, int afstandTotRandY, int modus)
-//private void Directie(int x, int y, int dx, int dy, int afstandTotRandX, int afstandTotRandy, int modus)
+//private void Directie(int x, int y, int dx, int dy, int afstandTotRandX, int afstandTotRandy, int modus)R
 
 private void WisLegaleZetten()
-//private void WisZetten()
+//private void WisZetten()-
 
 public void TelCirkels()
-//public void ScoreTeller()
+//public void ScoreTeller()L
