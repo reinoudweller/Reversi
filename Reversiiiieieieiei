@@ -218,8 +218,34 @@ namespace reversi
             Directie(x, y, 1, -1, afstandrandXrechts, afstandrandYboven, modus);
         }
         private void Directie(int x, int y, int dx, int dy, int afstandTotRandX, int afstandTotRandY, int modus)
-        {
+         {
+            int kleurtegenstander = -Speleraanzet;
 
+            afstandRandX = Math.Abs(afstandRandX);
+            afstandRandY = Math.Abs(afstandRandY);
+
+            int rX, rY;
+
+            for (rX = dx, rY = dy; Math.Abs(rX) <= afstandRandX && Math.Abs(rY) <= afstandRandY; rX += dx, rY += dy)
+            {
+                if (veld[x + rX, y + rY] == kleurtegenstander)
+                    continue;
+                if(veld [x + rX, y + rY] == Speleraanzet && (Math.Abs(rX) > 1 || Math.Abs(rY) > 1))
+                {
+                    switch(modus)
+                    {
+                        case Cirkelinsluiten:
+                            int iX, iY;
+                            for (iX = dx, iY = dy; Math.Abs(iX) < Math.Abs(rX) || Math.Abs(iY) < Math.Abs(rY); iX += dx, iY += dy)
+                                veld[x + iX, y + iY] = Speleraanzet;
+                            break;
+                        case ZetBepalen:
+                            veld[x, y] = Legalezet;
+                            break;
+                    }
+                }
+                break;
+            }
 
         }
         private void WisZetten()
