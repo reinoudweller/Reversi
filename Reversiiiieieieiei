@@ -99,10 +99,53 @@ namespace reversi
                                 gr.DrawEllipse(zwart, x * Groottevakje + Groottevakje / 4,
                                     y * Groottevakje + Groottevakje / 4, Groottevakje / 2, Groottevakje / 2);
                             break;
+                        }
+                    }
+                }
+
+            }
+         
+        private void panel1_Click(object sender, MouseEventArgs mea)
+        {
+            int muisX = mea.X;
+            int muisY = mea.Y;
+
+            for (int x = 0; x < VakjesX; x++)
+            {
+                for (int y = 0; y < VakjesY; y++)
+                {
+                    if (muisX >= x * Groottevakje && muisX < x * Groottevakje + Groottevakje && muisY >= y * Groottevakje && muisY < y * Groottevakje + Groottevakje)
+                    {
+                        if (veld[x, y] == Legalezet)
+                        {
+                            hulp = false;
+                            pasTeller = 0;
+                            Algoritme(x, y, Cirkelinsluiten);
+                            veld[x, y] = Speleraanzet;
+                            WisZetten();
+                            if (Speleraanzet == Rood)
+                                beurt++;
+                            Speleraanzet = -Speleraanzet;
+                            NieuwZet();
+
+                            ScoreTeller();
+
+                            if (Uitslag == 0 && pasTeller < 1)
+                            {
+                                if (Speleraanzet == Rood)
+                                    beurt++;
+                                Speleraanzet = -Speleraanzet;
+                                pasTeller++;
+                            }
+
+                            ScoreBlauw.Invalidate();
+                            ScoreRood.Invalidate();
+                            Aanzet.Invalidate();
+                            panel1.Invalidate();
+                        }
                     }
                 }
             }
-
         }
 
         private void HelpButton_Click(object sender, EventArgs e) //help aan en uit zettetn
