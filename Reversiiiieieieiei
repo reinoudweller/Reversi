@@ -48,10 +48,10 @@ namespace reversi
             VakjesY = (int)aantalY.Value;
             veld = new int[VakjesX, VakjesY];
             panel1.Size = new Size(VakjesX * Groottevakje + 1, VakjesY * Groottevakje + 1);
-            ClientSize = new Size(82, 175) + panel1.Size;
-            if (Width < 380)
-                Width = 380;
-            panel1.Location = new Point(panel1.Width - panel1.Width + 68, panel1.Location.Y);
+            ClientSize = new Size(100, 175) + panel1.Size;
+            if (Width < 500)
+                Width = 500;
+            panel1.Location = new Point(panel1.Width - panel1.Width + 100, panel1.Location.Y);
             if (panel1.Location.X < 168)
                panel1.Location = new Point(168, panel1.Location.Y);
 
@@ -63,11 +63,12 @@ namespace reversi
             veld[StartX- 1, StartY] = Rood;
             veld[StartX, StartY- 1] = Rood;
 
-
-
-
-
-
+            NieuwZet();
+            ScoreTeller();
+            ScoreBlauw.Invalidate();
+            ScoreRood.Invalidate();
+            panel1.Invalidate();
+        
         }
         private void panel1_Paint(object sender, PaintEventArgs pea)
         {
@@ -128,7 +129,20 @@ namespace reversi
 
         private void Aanzet_Paint (object sender, PaintEventArgs pea)
         {
+            Graphics gr = pea.Graphics;
+            Font fontInfo = new Font("Arial", 10, FontStyle.Regular);
 
+            if (Uitslag == 0 && pasTeller == 1)
+            {
+                if (RoodScore > BlauwScore)
+                    gr.DrawString("Rood heeft gewonnen!", fontInfo, Brushes.Red, 0, 0);
+                else if (BlauwScore > RoodScore)
+                    gr.DrawString("Blauw heeft gewonnen!", fontInfo, Brushes.Blue, 0, 0);
+                else
+                    gr.DrawString("Remise!", fontInfo, Brushes.Black, 0, 0);
+            }
+            else
+                gr.DrawString("Beurt " + beurt + " | " + StringSpelerAanZet + " is aan zet", fontInfo, Brushes.Black, 0, 0);
         }
 
         private void NieuwZet()
