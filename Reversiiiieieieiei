@@ -65,6 +65,9 @@ namespace reversi
 
 
 
+
+
+
         }
         private void panel1_Paint(object sender, PaintEventArgs pea)
         {
@@ -74,12 +77,13 @@ namespace reversi
 
         private void HelpButton_Click(object sender, EventArgs e) //help aan en uit zettetn
         {
-
+            hulp = !hulp;
+            panel1.Invalidate();
         }
 
         private void StartnieuwspelButton_click(object sender, EventArgs e) //Nieuwspel button
         {
-
+            Startnieuwspel();
         }
    
      
@@ -122,8 +126,17 @@ namespace reversi
         }
         private void WisZetten()
         {
+            for (int x = 0; x < VakjesX; x++)
+            {
+                for (int y = 0; y < VakjesY; y++)
+                {
+                    if (veld[x, y] == Legalezet)
+                        veld[x, y] = Leeg;
+                }
+            }
+        
 
-        }
+    }
         public void ScoreTeller()
         {
 
