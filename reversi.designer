@@ -35,9 +35,11 @@ namespace reversi
             this.ScoreRood = new System.Windows.Forms.Label();
             this.ScoreBlauw = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.Startnieuwspel = new System.Windows.Forms.Button();
+            this.aantalX = new System.Windows.Forms.NumericUpDown();
+            this.aantalY = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.aantalX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aantalY)).BeginInit();
             this.SuspendLayout();
             // 
             // LabelGrootte
@@ -98,29 +100,48 @@ namespace reversi
             this.button1.Text = "Help";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // Startnieuwspel
             // 
-            this.button2.Location = new System.Drawing.Point(125, 37);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(89, 41);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "Nieuw spel";
-            this.button2.UseVisualStyleBackColor = true;
+            this.Startnieuwspel.Location = new System.Drawing.Point(125, 37);
+            this.Startnieuwspel.Name = "Startnieuwspel";
+            this.Startnieuwspel.Size = new System.Drawing.Size(89, 41);
+            this.Startnieuwspel.TabIndex = 10;
+            this.Startnieuwspel.Text = "Nieuw spel";
+            this.Startnieuwspel.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // aantalX
             // 
-            this.textBox1.Location = new System.Drawing.Point(518, 25);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(85, 22);
-            this.textBox1.TabIndex = 11;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
+            this.aantalX.Location = new System.Drawing.Point(518, 25);
+            this.aantalX.Minimum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.aantalX.Name = "aantalX";
+            this.aantalX.Size = new System.Drawing.Size(99, 22);
+            this.aantalX.TabIndex = 11;
+            this.aantalX.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
             // 
-            // textBox2
+            // aantalY
             // 
-            this.textBox2.Location = new System.Drawing.Point(518, 56);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(85, 22);
-            this.textBox2.TabIndex = 12;
+            this.aantalY.Location = new System.Drawing.Point(518, 56);
+            this.aantalY.Minimum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.aantalY.Name = "aantalY";
+            this.aantalY.Size = new System.Drawing.Size(99, 22);
+            this.aantalY.TabIndex = 12;
+            this.aantalY.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
             // 
             // Reversi
             // 
@@ -128,9 +149,9 @@ namespace reversi
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(637, 529);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.aantalY);
+            this.Controls.Add(this.aantalX);
+            this.Controls.Add(this.Startnieuwspel);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.ScoreBlauw);
             this.Controls.Add(this.ScoreRood);
@@ -140,6 +161,8 @@ namespace reversi
             this.Name = "Reversi";
             this.Text = "Reversi";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.aantalX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aantalY)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,9 +176,9 @@ namespace reversi
         private System.Windows.Forms.Label ScoreRood;
         private System.Windows.Forms.Label ScoreBlauw;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button Startnieuwspel;
+        private System.Windows.Forms.NumericUpDown aantalX;
+        private System.Windows.Forms.NumericUpDown aantalY;
     }
 }
 
