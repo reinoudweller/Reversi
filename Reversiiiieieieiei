@@ -19,14 +19,18 @@ namespace reversi
         const int Leeg = 0; 
         const int Blauw = 1;
         const int Rood = 2;
+        const int Legalezet = 2;
         public int[,] veld;
         public int Speleraanzet;
         public string StringSpelerAanZet => Speleraanzet == Rood ? "Rood" : "Blauw";
-        const int Groottevakje = 32;
+        const int Groottevakje = 32; //misschien moeten we andere grootte doen
         const int diameterCirkels = Groottevakje - 4;
         const int ZetBepalen = 0;
-
-
+        const int Cirkelinsluiten = 1;
+        private int RoodScore; //gebruiken in Scoreteller
+        private int BlauwScore;
+        private int Uitslag; //Voor als er geen zet meer gedaan kan worden
+        private int pasTeller; //telt hoevaak er achter elkaar gepast is, als allebei passen is het spel klaaar
 
 
         public Reversi()
