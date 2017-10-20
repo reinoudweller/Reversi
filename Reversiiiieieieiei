@@ -227,7 +227,7 @@ namespace reversi
             Directie(x, y, -1, -1, afstandrandXlinks, afstandrandYboven, modus);
             Directie(x, y, 1, -1, afstandrandXrechts, afstandrandYboven, modus);
         }
-        private void Directie(int x, int y, int dx, int dy, int afstandTotRandX, int afstandTotRandY, int modus)
+        private void Directie(int x, int y, int dx, int dy, int afstandRandX, int afstandRandY, int modus)
          {
             int kleurtegenstander = -Speleraanzet;
 
