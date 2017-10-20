@@ -19,11 +19,12 @@ namespace reversi
         const int Leeg = 0; 
         const int Blauw = 1;
         const int Rood = 2;
-        private int[,]
-        private int Speleraanzet;
-        private string StringSpelerAanZet => Speleraanzet == Rood ? "Rood" : "Blauw";
+        public int[,] veld;
+        public int Speleraanzet;
+        public string StringSpelerAanZet => Speleraanzet == Rood ? "Rood" : "Blauw";
         const int Groottevakje = 32;
-        const int diameterCirkels = Groottevakje - 4; 
+        const int diameterCirkels = Groottevakje - 4;
+        const int ZetBepalen = 0;
 
 
 
@@ -31,18 +32,32 @@ namespace reversi
         public Reversi()
         {
             InitializeComponent();
+            Startnieuwspel();
+            
         }
 
-        private void Startnieuwspel_Click(object sender, EventArgs e) //start nieuw spel
+        private void Startnieuwspel() //start nieuw spel
         {
             beurt = 1;
             hulp = false;
             VakjesX = (int)aantalX.Value;
             VakjesY = (int)aantalY.Value;
             veld = new int[VakjesX, VakjesY];
+            panel1.Size = new Size(VakjesX * Groottevakje + 1, VakjesY * Groottevakje + 1);
+            ClientSize = new Size(82, 175) + panel1.Size;
+            if (Width < 380)
+                Width = 380;
+            panel1.Location = new Point(panel1.Width - panel1.Width + 68, panel1.Location.Y);
+            if (panel1.Location.X < 168)
+               panel1.Location = new Point(168, panel1.Location.Y);
 
-            
+            int StartX = VakjesX / 2;
+            int StartY = VakjesY / 2;
 
+            veld[StartX, StartY] = Blauw;
+            veld[StartX - 1, StartY- 1] = Blauw;
+            veld[StartX- 1, StartY] = Rood;
+            veld[StartX, StartY- 1] = Rood;
 
 
 
@@ -53,38 +68,63 @@ namespace reversi
 
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void HelpButton_Click(object sender, EventArgs e) //help aan en uit zettetn
         {
 
         }
 
-        private void button1_Click(object sender, EventArgs e) //help aan en uit zettetn
+        private void StartnieuwspelButton_click(object sender, EventArgs e) //Nieuwspel button
+        {
+
+        }
+   
+     
+        private void ScoreBlauw_Paint(object sender, PaintEventArgs pea)
         {
 
         }
 
-        private void button2_Click(object sender, EventArgs e) //welke button is dit??
-        {
-
-        }
-        private void label1_Click(object sender, EventArgs e)
+        private void ScoreRood_Paint(object sender, PaintEventArgs pea)
         {
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void Aanzet_Paint (object sender, PaintEventArgs pea)
         {
 
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void NieuwZet()
+        {
+            for (int x = 0; x < VakjesX; x++)
+            {
+                for (int y = 0; y < VakjesY; y++)
+                {
+                    if (veld[x, y] == Leeg)
+                        Algoritme(x, y, ZetBepalen);
+                }
+            }
+        }
+
+        private void Algoritme(int x, int y, int modus)
+        {
+
+
+        }
+        private void Directie(int x, int y, int dx, int dy, int afstandTotRandX, int afstandTotRandY, int modus)
+        {
+
+
+        }
+        private void WisZetten()
+        {
+
+        }
+        public void ScoreTeller()
         {
 
         }
 
-        private void textBox1_TextChanged_1(object sender, EventArgs e)
-        {
 
-        }
     }
 }
