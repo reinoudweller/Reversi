@@ -71,7 +71,36 @@ namespace reversi
         }
         private void panel1_Paint(object sender, PaintEventArgs pea)
         {
+            Graphics gr = pea.Graphics;
 
+            Pen zwart   = Pens.Black;
+            Brush blauw = Brushes.RoyalBlue;
+            Brush rood  = Brushes.OrangeRed;
+
+            for (int x = 0; x < VakjesX; x++)
+            {
+                for (int y = 0; y < VakjesY; y++)
+                {
+                    gr.DrawRectangle(zwart, x * Groottevakje, y * Groottevakje, Groottevakje, Groottevakje);
+
+                    switch (veld[x, y])
+                    {
+                        case Rood:
+                            gr.FillEllipse(rood, x * Groottevakje + (Groottevakje - diameterCirkels) / 2,
+                                y * Groottevakje + (Groottevakje - diameterCirkels) / 2, diameterCirkels, diameterCirkels);
+                            break;
+                        case Blauw:
+                            gr.FillEllipse(blauw, x * Groottevakje + (Groottevakje - diameterCirkels) / 2,
+                                y * Groottevakje + (Groottevakje - diameterCirkels) / 2, diameterCirkels, diameterCirkels);
+                            break;
+                        case Legalezet:
+                            if (hulp)
+                                gr.DrawEllipse(zwart, x * Groottevakje + Groottevakje / 4,
+                                    y * Groottevakje + Groottevakje / 4, Groottevakje / 2, Groottevakje / 2);
+                            break;
+                    }
+                }
+            }
 
         }
 
