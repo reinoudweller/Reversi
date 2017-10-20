@@ -1,41 +1,302 @@
-alles met // zijn onze methodes en de methodes zonder // zijn die goeie methodes
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
-public Reversi()
-//public Reversi()
+namespace reversi
+{
+    public partial class Reversi : Form
+    {
+        private bool hulp; //hulp aan of uit
+        private int beurt; //welke beurt is het?
+        private int VakjesX; 
+        private int VakjesY;
+        const int Leeg = 0; 
+        const int Blauw = -1;
+        const int Rood = 1;
+        const int Legalezet = 2;
+        public int[,] veld;
+        public int Speleraanzet;
+        public string StringSpelerAanZet => Speleraanzet == Rood ? "Rood" : "Blauw";
+        const int Groottevakje = 32; //misschien moeten we andere grootte doen
+        const int diameterCirkels = Groottevakje - 4;
+        const int ZetBepalen = 0;
+        const int Cirkelinsluiten = 1;
+        private int RoodScore; //gebruiken in Scoreteller
+        private int BlauwScore;
+        private int Uitslag; //Voor als er geen zet meer gedaan kan worden
+        private int pasTeller; //telt hoevaak er achter elkaar gepast is, als allebei passen is het spel klaaar
 
-private void StartNieuwSpel()
-//private void Startnieuwspel()R
 
-private void speelVeldPanel_Click(object obj, MouseEventArgs mea)
-//private void panel1_Click(object sender, MouseEventArgs mea)L
+        public Reversi()
+        {
+            InitializeComponent();
+            Startnieuwspel();
+            
+        }
 
-private void infoPanel_Paint(object sender, PaintEventArgs e)
-//private void ScoreBlauw_Paint(object sender, PaintEventArgs e)L
-//private void ScoreRood_Paint(object sender, PaintEventArgs e)L
+        private void Startnieuwspel() //start nieuw spel
+        {
+            beurt = 1;
+            hulp = false;
+            Speleraanzet = Blauw;
+            VakjesX = (int)aantalX.Value;
+            VakjesY = (int)aantalY.Value;
+            veld = new int[VakjesX, VakjesY];
 
-private void statsPanel_Paint(object sender, PaintEventArgs e)
-//private void Aanzet_Paint(object sender, PaintEventArgs e)R
+            Speelveld.Size = new Size(VakjesX * Groottevakje + 1, VakjesY * Groottevakje + 1);
+            ClientSize = new Size(100, 175) + Speelveld.Size;
+            if (Width < 500)
+                Width = 500;
+            Speelveld.Location = new Point(Speelveld.Width - Speelveld.Width + 100, Speelveld.Location.Y);
+            if (Speelveld.Location.X < 168)
+               Speelveld.Location = new Point(168, Speelveld.Location.Y);
 
-private void speelVeldPanel_Paint(object sender, PaintEventArgs e)
-//private void panel1_Paint(object sender, PaintEventArgs pea)L
 
-private void nieuwSpelButton_Click(object sender, EventArgs e)
-//private void StartnieuwspelButton(object sender, EventArgs e)-
+            int StartX = VakjesX / 2;
+            int StartY = VakjesY / 2;
 
-private void helpButton_Click(object sender, EventArgs e)
-//private void HelpButton_Click(object sender, EventArgs e)R
+            veld[StartX, StartY] = Blauw;
+            veld[StartX - 1, StartY- 1] = Blauw;
+            veld[StartX- 1, StartY] = Rood;
+            veld[StartX, StartY- 1] = Rood;
 
-private void NieuweLegaleZetten()
-//private void NieuwZet()-
+            NieuwZet();
+            ScoreTeller();
+            ScoreBlauw.Invalidate();
+            ScoreRood.Invalidate();
+            Speelveld.Invalidate();
+        
+        }
+        private void Speelveld_Paint(object sender, PaintEventArgs pea)
+        {
+            Graphics gr = pea.Graphics;
 
-private void ReversiAlgoritme(int x, int y, int modus)
-//private void Algoritme(int x, int y, int modus)R
+            Pen zwart = Pens.Black;
+            Brush blauw = Brushes.RoyalBlue;
+            Brush rood = Brushes.OrangeRed;
 
-private void CheckDirectie(int x, int y, int dx, int dy, int afstandTotRandX, int afstandTotRandY, int modus)
-//private void Directie(int x, int y, int dx, int dy, int afstandTotRandX, int afstandTotRandy, int modus)R
+            for (int x = 0; x < VakjesX; x++)
+            {
+                for (int y = 0; y < VakjesY; y++)
+                {
+                    gr.DrawRectangle(zwart, x * Groottevakje, y * Groottevakje, Groottevakje, Groottevakje);
 
-private void WisLegaleZetten()
-//private void WisZetten()-
+                    switch (veld[x, y])
+                    {
+                        case Rood:
+                            gr.FillEllipse(rood, x * Groottevakje + (Groottevakje - diameterCirkels) / 2,
+                                y * Groottevakje + (Groottevakje - diameterCirkels) / 2, diameterCirkels, diameterCirkels);
+                            break;
+                        case Blauw:
+                            gr.FillEllipse(blauw, x * Groottevakje + (Groottevakje - diameterCirkels) / 2,
+                                y * Groottevakje + (Groottevakje - diameterCirkels) / 2, diameterCirkels, diameterCirkels);
+                            break;
+                        case Legalezet:
+                            if (hulp)
+                                gr.DrawEllipse(zwart, x * Groottevakje + Groottevakje / 4,
+                                    y * Groottevakje + Groottevakje / 4, Groottevakje / 2, Groottevakje / 2);
+                            break;
+                    }
+                }
+            }
 
-public void TelCirkels()
-//public void ScoreTeller()L
+        }
+
+        private void Speelveld_click(object sender, MouseEventArgs mea)
+        {
+            int muisX = mea.X;
+            int muisY = mea.Y;
+
+            for (int x = 0; x < VakjesX; x++)
+            {
+                for (int y = 0; y < VakjesY; y++)
+                {
+                    if (muisX >= x * Groottevakje && muisX < x * Groottevakje + Groottevakje && muisY >= y * Groottevakje && muisY < y * Groottevakje + Groottevakje)
+                    {
+                        if (veld[x, y] == Legalezet)
+                        {
+                            hulp = false;
+                            pasTeller = 0;
+                            Algoritme(x, y, Cirkelinsluiten);
+                            veld[x, y] = Speleraanzet;
+                            WisZetten();
+                            if (Speleraanzet == Rood)
+                                beurt++;
+                            Speleraanzet = -Speleraanzet;
+                            NieuwZet();
+
+                            ScoreTeller();
+
+                            if (Uitslag == 0 && pasTeller < 1)
+                            {
+                                if (Speleraanzet == Rood)
+                                    beurt++;
+                                Speleraanzet = -Speleraanzet;
+                                pasTeller++;
+                            }
+
+                            ScoreBlauw.Invalidate();
+                            ScoreRood.Invalidate();
+                            Aanzet.Invalidate();
+                            Speelveld.Invalidate();
+                        }
+                    }
+                }
+            }
+        }
+
+        private void HelpButton_Click(object sender, EventArgs e) //help aan en uit zettetn
+        {
+            hulp = !hulp;
+            Speelveld.Invalidate();
+        }
+
+        private void StartnieuwspelButton_click(object sender, EventArgs e) //Nieuwspel button
+        {
+            Startnieuwspel();
+        }
+   
+     
+        private void ScoreBlauw_Paint(object sender, PaintEventArgs pea)
+        {
+            Graphics gr = pea.Graphics;
+
+            Brush blauw = Brushes.RoyalBlue;
+            Font scoreFont = new Font("Arial", 10, FontStyle.Regular);
+
+            gr.DrawString("Blauw " + RoodScore, scoreFont, blauw, 25, 1);
+        }
+
+        private void ScoreRood_Paint(object sender, PaintEventArgs pea)
+        {
+            Graphics gr = pea.Graphics;
+
+            Brush rood = Brushes.OrangeRed;
+            Font scoreFont = new Font("Arial", 10, FontStyle.Regular);
+
+            gr.DrawString("Rood " + RoodScore, scoreFont, rood, 25, 1);
+        }
+
+
+        private void Aanzet_Paint (object sender, PaintEventArgs pea)
+        {
+            Graphics gr = pea.Graphics;
+            Font fontInfo = new Font("Arial", 10, FontStyle.Regular);
+
+            if (Uitslag == 0 && pasTeller == 1)
+            {
+                if (RoodScore > BlauwScore)
+                    gr.DrawString("Rood heeft gewonnen!", fontInfo, Brushes.Red, 0, 0);
+                else if (BlauwScore > RoodScore)
+                    gr.DrawString("Blauw heeft gewonnen!", fontInfo, Brushes.Blue, 0, 0);
+                else
+                    gr.DrawString("Remise!", fontInfo, Brushes.Black, 0, 0);
+            }
+            else
+                gr.DrawString("Beurt " + beurt + " | " + StringSpelerAanZet + " is aan zet", fontInfo, Brushes.Black, 0, 0);
+        }
+
+        private void NieuwZet()
+        {
+            for (int x = 0; x < VakjesX; x++)
+            {
+                for (int y = 0; y < VakjesY; y++)
+                {
+                    if (veld[x, y] == Leeg)
+                        Algoritme(x, y, ZetBepalen);
+                }
+            }
+        }
+
+        private void Algoritme(int x, int y, int modus)
+        {
+            int afstandrandXlinks = x;
+            int afstandrandXrechts = VakjesX - 1 - x;
+            int afstandrandYboven = y;
+            int afstandrandYonder = VakjesY - 1 - y;
+            int geenafstandnodig = -1;
+
+            Directie(x, y, 1, 0, afstandrandXrechts, geenafstandnodig, modus);
+            Directie(x, y, -1, 0, afstandrandXlinks, geenafstandnodig, modus);
+            Directie(x, y, 0, -1, geenafstandnodig, afstandrandYboven, modus);
+            Directie(x, y, 0, 1, geenafstandnodig, afstandrandYonder, modus);
+            Directie(x, y, 1, 1, afstandrandXrechts, afstandrandYonder, modus);
+            Directie(x, y, -1, 1, afstandrandXlinks, afstandrandYonder, modus);
+            Directie(x, y, -1, -1, afstandrandXlinks, afstandrandYboven, modus);
+            Directie(x, y, 1, -1, afstandrandXrechts, afstandrandYboven, modus);
+        }
+
+        private void Directie(int x, int y, int dx, int dy, int afstandRandX, int afstandRandY, int modus)
+        {
+            int kleurtegenstander = -Speleraanzet;
+
+            afstandRandX = Math.Abs(afstandRandX);
+            afstandRandY = Math.Abs(afstandRandY);
+
+            int rX, rY;
+
+            for (rX = dx, rY = dy; Math.Abs(rX) <= afstandRandX && Math.Abs(rY) <= afstandRandY; rX += dx, rY += dy)
+            {
+                if (veld[x + rX, y + rY] == kleurtegenstander)
+                    continue;
+                if(veld [x + rX, y + rY] == Speleraanzet && (Math.Abs(rX) > 1 || Math.Abs(rY) > 1))
+                {
+                    switch(modus)
+                    {
+                        case Cirkelinsluiten:
+                            int iX, iY;
+                            for (iX = dx, iY = dy; Math.Abs(iX) < Math.Abs(rX) || Math.Abs(iY) < Math.Abs(rY); iX += dx, iY += dy)
+                                veld[x + iX, y + iY] = Speleraanzet;
+                            break;
+                        case ZetBepalen:
+                            veld[x, y] = Legalezet;
+                            break;
+                    }
+                }
+                break;
+            }
+
+        }
+        private void WisZetten()
+        {
+            for (int x = 0; x < VakjesX; x++)
+            {
+                for (int y = 0; y < VakjesY; y++)
+                {
+                    if (veld[x, y] == Legalezet)
+                        veld[x, y] = Leeg;
+                }
+            }
+        
+
+    }
+        public void ScoreTeller()
+        {
+            int blauwTeller = 0;
+            int roodTeller = 0;
+            int tellerLegalezet = 0; 
+
+            for ( int x = 0; x < VakjesX; x++)
+            {
+                for (int y = 0; y < VakjesY; y++)
+                {
+                    if (veld[x, y] == Blauw)
+                        blauwTeller++;
+                    if (veld[x, y] == Rood)
+                        roodTeller++;
+                    if (veld[x, y] == Legalezet)
+                        tellerLegalezet++;
+
+                }
+            }
+        }
+
+
+    }
+}
