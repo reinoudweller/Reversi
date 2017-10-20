@@ -273,7 +273,23 @@ namespace reversi
     }
         public void ScoreTeller()
         {
+            int blauwTeller = 0;
+            int roodTeller = 0;
+            int tellerLegalezet = 0; 
 
+            for ( int x = 0; x < VakjesX; x++)
+            {
+                for (int y = 0; y < VakjesY; y++)
+                {
+                    if (veld[x, y] == Blauw)
+                        blauwTeller++;
+                    if (veld[x, y] == Rood)
+                        roodTeller++;
+                    if (veld[x, y] == Legalezet)
+                        tellerLegalezet++;
+
+                }
+            }
         }
 
 
