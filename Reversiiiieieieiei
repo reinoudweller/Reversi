@@ -158,9 +158,21 @@ namespace reversi
         }
 
         private void Algoritme(int x, int y, int modus)
-        {
+      {
+            int afstandrandXlinks = x;
+            int afstandrandXrechts = VakjesX - 1 - x;
+            int afstandrandYboven = y;
+            int afstandrandYonder = VakjesY - 1 - y;
+            int geenafstandnodig = -1;
 
-
+            Directie(x, y, 1, 0, afstandrandXrechts, geenafstandnodig, modus);
+            Directie(x, y, -1, 0, afstandrandXlinks, geenafstandnodig, modus);
+            Directie(x, y, 0, -1, geenafstandnodig, afstandrandYboven, modus);
+            Directie(x, y, 0, 1, geenafstandnodig, afstandrandYonder, modus);
+            Directie(x, y, 1, 1, afstandrandXrechts, afstandrandYonder, modus);
+            Directie(x, y, -1, 1, afstandrandXlinks, afstandrandYonder, modus);
+            Directie(x, y, -1, -1, afstandrandXlinks, afstandrandYboven, modus);
+            Directie(x, y, 1, -1, afstandrandXrechts, afstandrandYboven, modus);
         }
         private void Directie(int x, int y, int dx, int dy, int afstandTotRandX, int afstandTotRandY, int modus)
         {
