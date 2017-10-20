@@ -162,12 +162,22 @@ namespace reversi
      
         private void ScoreBlauw_Paint(object sender, PaintEventArgs pea)
         {
+            Graphics gr = pea.Graphics;
 
+            Brush blauw = Brushes.RoyalBlue;
+            Font scoreFont = new Font("Arial", 10, FontStyle.Regular);
+
+            gr.DrawString("Blauw " + RoodScore, scoreFont, blauw, 25, 1);
         }
 
         private void ScoreRood_Paint(object sender, PaintEventArgs pea)
         {
+            Graphics gr = pea.Graphics;
 
+            Brush rood = Brushes.OrangeRed;
+            Font scoreFont = new Font("Arial", 10, FontStyle.Regular);
+
+            gr.DrawString("Rood " + RoodScore, scoreFont, rood, 25, 1);
         }
 
         private void Aanzet_Paint (object sender, PaintEventArgs pea)
