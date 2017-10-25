@@ -41,7 +41,6 @@ namespace reversi
             this.Aanzet = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.aantalX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aantalY)).BeginInit();
-            this.
             this.SuspendLayout();
             // 
             // LabelGrootte
