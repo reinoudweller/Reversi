@@ -17,8 +17,8 @@ namespace reversi
         private int VakjesX; 
         private int VakjesY;
         const int Leeg = 0; 
-        const int Blauw = 1;
-        const int Rood = 2;
+        const int Blauw = -1;
+        const int Rood = 1;
         const int Legalezet = 2;
         public int[,] veld;
         public int Speleraanzet;
@@ -44,16 +44,19 @@ namespace reversi
         {
             beurt = 1;
             hulp = false;
+            Speleraanzet = Blauw;
             VakjesX = (int)aantalX.Value;
             VakjesY = (int)aantalY.Value;
             veld = new int[VakjesX, VakjesY];
-            panel1.Size = new Size(VakjesX * Groottevakje + 1, VakjesY * Groottevakje + 1);
-            ClientSize = new Size(100, 175) + panel1.Size;
+
+            Speelveld.Size = new Size(VakjesX * Groottevakje + 1, VakjesY * Groottevakje + 1);
+            ClientSize = new Size(100, 175) + Speelveld.Size;
             if (Width < 500)
                 Width = 500;
-            panel1.Location = new Point(panel1.Width - panel1.Width + 100, panel1.Location.Y);
-            if (panel1.Location.X < 168)
-               panel1.Location = new Point(168, panel1.Location.Y);
+            Speelveld.Location = new Point(Speelveld.Width - Speelveld.Width + 100, Speelveld.Location.Y);
+            if (Speelveld.Location.X < 168)
+               Speelveld.Location = new Point(168, Speelveld.Location.Y);
+
 
             int StartX = VakjesX / 2;
             int StartY = VakjesY / 2;
@@ -67,16 +70,16 @@ namespace reversi
             ScoreTeller();
             ScoreBlauw.Invalidate();
             ScoreRood.Invalidate();
-            panel1.Invalidate();
+            Speelveld.Invalidate();
         
         }
-        private void panel1_Paint(object sender, PaintEventArgs pea)
+        private void Speelveld_Paint(object sender, PaintEventArgs pea)
         {
             Graphics gr = pea.Graphics;
 
-            Pen zwart   = Pens.Black;
+            Pen zwart = Pens.Black;
             Brush blauw = Brushes.RoyalBlue;
-            Brush rood  = Brushes.OrangeRed;
+            Brush rood = Brushes.OrangeRed;
 
             for (int x = 0; x < VakjesX; x++)
             {
@@ -99,13 +102,13 @@ namespace reversi
                                 gr.DrawEllipse(zwart, x * Groottevakje + Groottevakje / 4,
                                     y * Groottevakje + Groottevakje / 4, Groottevakje / 2, Groottevakje / 2);
                             break;
-                        }
                     }
                 }
-
             }
-         
-        private void panel1_Click(object sender, MouseEventArgs mea)
+
+        }
+
+        private void Speelveld_click(object sender, MouseEventArgs mea)
         {
             int muisX = mea.X;
             int muisY = mea.Y;
@@ -141,7 +144,7 @@ namespace reversi
                             ScoreBlauw.Invalidate();
                             ScoreRood.Invalidate();
                             Aanzet.Invalidate();
-                            panel1.Invalidate();
+                            Speelveld.Invalidate();
                         }
                     }
                 }
@@ -151,7 +154,7 @@ namespace reversi
         private void HelpButton_Click(object sender, EventArgs e) //help aan en uit zettetn
         {
             hulp = !hulp;
-            panel1.Invalidate();
+            Speelveld.Invalidate();
         }
 
         private void StartnieuwspelButton_click(object sender, EventArgs e) //Nieuwspel button
@@ -179,6 +182,7 @@ namespace reversi
 
             gr.DrawString("Rood " + RoodScore, scoreFont, rood, 25, 1);
         }
+
 
         private void Aanzet_Paint (object sender, PaintEventArgs pea)
         {
@@ -211,7 +215,7 @@ namespace reversi
         }
 
         private void Algoritme(int x, int y, int modus)
-      {
+        {
             int afstandrandXlinks = x;
             int afstandrandXrechts = VakjesX - 1 - x;
             int afstandrandYboven = y;
@@ -227,8 +231,9 @@ namespace reversi
             Directie(x, y, -1, -1, afstandrandXlinks, afstandrandYboven, modus);
             Directie(x, y, 1, -1, afstandrandXrechts, afstandrandYboven, modus);
         }
+
         private void Directie(int x, int y, int dx, int dy, int afstandRandX, int afstandRandY, int modus)
-         {
+        {
             int kleurtegenstander = -Speleraanzet;
 
             afstandRandX = Math.Abs(afstandRandX);
