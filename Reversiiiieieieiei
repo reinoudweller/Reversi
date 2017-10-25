@@ -73,40 +73,6 @@ namespace reversi
             Speelveld.Invalidate();
         
         }
-        private void Speelveld_Paint(object sender, PaintEventArgs pea)
-        {
-            Graphics gr = pea.Graphics;
-
-            Pen zwart = Pens.Black;
-            Brush blauw = Brushes.RoyalBlue;
-            Brush rood = Brushes.OrangeRed;
-
-            for (int x = 0; x < VakjesX; x++)
-            {
-                for (int y = 0; y < VakjesY; y++)
-                {
-                    gr.DrawRectangle(zwart, x * Groottevakje, y * Groottevakje, Groottevakje, Groottevakje);
-
-                    switch (veld[x, y])
-                    {
-                        case Rood:
-                            gr.FillEllipse(rood, x * Groottevakje + (Groottevakje - diameterCirkels) / 2,
-                                y * Groottevakje + (Groottevakje - diameterCirkels) / 2, diameterCirkels, diameterCirkels);
-                            break;
-                        case Blauw:
-                            gr.FillEllipse(blauw, x * Groottevakje + (Groottevakje - diameterCirkels) / 2,
-                                y * Groottevakje + (Groottevakje - diameterCirkels) / 2, diameterCirkels, diameterCirkels);
-                            break;
-                        case Legalezet:
-                            if (hulp)
-                                gr.DrawEllipse(zwart, x * Groottevakje + Groottevakje / 4,
-                                    y * Groottevakje + Groottevakje / 4, Groottevakje / 2, Groottevakje / 2);
-                            break;
-                    }
-                }
-            }
-
-        }
 
         private void Speelveld_click(object sender, MouseEventArgs mea)
         {
@@ -150,19 +116,6 @@ namespace reversi
                 }
             }
         }
-
-        private void HelpButton_Click(object sender, EventArgs e) //help aan en uit zettetn
-        {
-            hulp = !hulp;
-            Speelveld.Invalidate();
-        }
-
-        private void StartnieuwspelButton_click(object sender, EventArgs e) //Nieuwspel button
-        {
-            Startnieuwspel();
-        }
-   
-     
         private void ScoreBlauw_Paint(object sender, PaintEventArgs pea)
         {
             Graphics gr = pea.Graphics;
@@ -182,9 +135,7 @@ namespace reversi
 
             gr.DrawString("Rood " + RoodScore, scoreFont, rood, 25, 1);
         }
-
-
-        private void Aanzet_Paint (object sender, PaintEventArgs pea)
+        private void Aanzet_Paint(object sender, PaintEventArgs pea)
         {
             Graphics gr = pea.Graphics;
             Font fontInfo = new Font("Arial", 10, FontStyle.Regular);
@@ -201,6 +152,56 @@ namespace reversi
             else
                 gr.DrawString("Beurt " + beurt + " | " + StringSpelerAanZet + " is aan zet", fontInfo, Brushes.Black, 0, 0);
         }
+        private void Speelveld_Paint(object sender, PaintEventArgs pea)
+        {
+            Graphics gr = pea.Graphics;
+
+            Pen zwart = Pens.Black;
+            Brush blauw = Brushes.RoyalBlue;
+            Brush rood = Brushes.OrangeRed;
+
+            for (int x = 0; x < VakjesX; x++)
+            {
+                for (int y = 0; y < VakjesY; y++)
+                {
+                    gr.DrawRectangle(zwart, x * Groottevakje, y * Groottevakje, Groottevakje, Groottevakje);
+
+                    switch (veld[x, y])
+                    {
+                        case Rood:
+                            gr.FillEllipse(rood, x * Groottevakje + (Groottevakje - diameterCirkels) / 2,
+                                y * Groottevakje + (Groottevakje - diameterCirkels) / 2, diameterCirkels, diameterCirkels);
+                            break;
+                        case Blauw:
+                            gr.FillEllipse(blauw, x * Groottevakje + (Groottevakje - diameterCirkels) / 2,
+                                y * Groottevakje + (Groottevakje - diameterCirkels) / 2, diameterCirkels, diameterCirkels);
+                            break;
+                        case Legalezet:
+                            if (hulp)
+                                gr.DrawEllipse(zwart, x * Groottevakje + Groottevakje / 4,
+                                    y * Groottevakje + Groottevakje / 4, Groottevakje / 2, Groottevakje / 2);
+                            break;
+                    }
+                }
+            }
+
+        }
+        private void StartnieuwspelButton_click(object sender, EventArgs e) //Nieuwspel button
+        {
+            Startnieuwspel();
+        }
+
+
+        private void HelpButton_Click(object sender, EventArgs e) //help aan en uit zettetn
+        {
+            hulp = !hulp;
+            Speelveld.Invalidate();
+        }
+
+   
+     
+
+
 
         private void NieuwZet()
         {
@@ -295,6 +296,10 @@ namespace reversi
 
                 }
             }
+            BlauwScore = blauwTeller;
+            RoodScore = roodTeller;
+            Uitslag = tellerLegalezet;
+
         }
 
 
