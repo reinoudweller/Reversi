@@ -30,7 +30,7 @@ namespace reversi
         {
             this.LabelGrootte = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.Speelveld = new System.Windows.Forms.Panel();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.ScoreRood = new System.Windows.Forms.Label();
             this.ScoreBlauw = new System.Windows.Forms.Label();
@@ -41,6 +41,7 @@ namespace reversi
             this.Aanzet = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.aantalX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aantalY)).BeginInit();
+            this.
             this.SuspendLayout();
             // 
             // LabelGrootte
@@ -61,14 +62,18 @@ namespace reversi
             this.label2.TabIndex = 2;
             this.label2.Text = "Breette";
             // 
-            // panel1
+            // Speelveld
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Location = new System.Drawing.Point(20, 107);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(598, 410);
-            this.panel1.TabIndex = 6;
+            this.Speelveld.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.Speelveld.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Speelveld.Location = new System.Drawing.Point(20, 107);
+            this.Speelveld.Name = "Speelveld";
+            this.Speelveld.Size = new System.Drawing.Size(598, 410);
+            this.Speelveld.TabIndex = 6;
+            this.Speelveld.Paint += new System.Windows.Forms.PaintEventHandler(this.Speelveld_Paint);
+            this.Speelveld.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Speelveld_click);
+
+
             // 
             // ScoreRood
             // 
@@ -79,6 +84,8 @@ namespace reversi
             this.ScoreRood.Size = new System.Drawing.Size(42, 17);
             this.ScoreRood.TabIndex = 7;
             this.ScoreRood.Text = "Rood";
+            this.ScoreRood.Paint += new System.Windows.Forms.PaintEventHandler(this.ScoreRood_Paint);
+
             // 
             // ScoreBlauw
             // 
@@ -89,6 +96,7 @@ namespace reversi
             this.ScoreBlauw.Size = new System.Drawing.Size(45, 17);
             this.ScoreBlauw.TabIndex = 8;
             this.ScoreBlauw.Text = "Blauw";
+            this.ScoreBlauw.Paint += new System.Windows.Forms.PaintEventHandler(this.ScoreBlauw_Paint);
             // 
             // HelpButton
             // 
@@ -108,6 +116,8 @@ namespace reversi
             this.StartnieuwspelButton.TabIndex = 10;
             this.StartnieuwspelButton.Text = "Nieuw spel";
             this.StartnieuwspelButton.UseVisualStyleBackColor = true;
+            this.StartnieuwspelButton.Click += new System.EventHandler(this.StartnieuwspelButton_click);
+
             // 
             // aantalX
             // 
@@ -150,6 +160,8 @@ namespace reversi
             this.Aanzet.Name = "Aanzet";
             this.Aanzet.Size = new System.Drawing.Size(0, 17);
             this.Aanzet.TabIndex = 13;
+            this.Aanzet.Paint += new System.Windows.Forms.PaintEventHandler(this.Aanzet_Paint);
+
             // 
             // Reversi
             // 
@@ -164,7 +176,7 @@ namespace reversi
             this.Controls.Add(this.HelpButton);
             this.Controls.Add(this.ScoreBlauw);
             this.Controls.Add(this.ScoreRood);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.Speelveld);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.LabelGrootte);
             this.Name = "Reversi";
@@ -179,7 +191,7 @@ namespace reversi
         #endregion
         private System.Windows.Forms.Label LabelGrootte;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel Speelveld;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.Label ScoreRood;
         private System.Windows.Forms.Label ScoreBlauw;
